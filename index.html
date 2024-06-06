@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peminjaman Ruang</title>
+    <style>
+        /* Your existing CSS styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /* Your existing CSS styles */
+        .room-gallery-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .room-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .room-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .room-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .room-item:hover .room-info {
+            opacity: 1;
+        }
+
+        .room-item:hover .room-photo {
+            transform: scale(1.1);
+        }
+        .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+       }
+       /* Your existing CSS styles */
+       .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .form-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-button:hover {
+            background-color: #0056b3;
+        }
+
+        .welcome-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .welcome-description {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+        /* Your existing CSS styles */
+        .room-gallery-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .room-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .room-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .room-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .room-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .room-item:hover .room-info {
+            opacity: 1;
+        }
+
+        .room-item:hover .room-photo {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+        <div class="welcome-container">
+            <div class="welcome-text">Selamat Datang!</div>
+            <div class="welcome-description">Silakan pilih ruangan yang ingin Anda lihat:</div>
+        </div>
+        <div class="room-gallery-container">
+            <div class="room-gallery">
+                <div class="room-item" data-ruangan="Ruangan 1" data-kapasitas="20" data-deskripsi="Deskripsi Ruangan 1">
+                    <img class="room-photo" src="https://source.unsplash.com/400x300/?room" alt="Foto Ruangan 1">
+                    <div class="room-info">
+                        <h3>Ruangan 1</h3>
+                        <p>Kapasitas: 20</p>
+                        <p>Deskripsi: Deskripsi Ruangan 1</p>
+                    </div>
+                </div>
+                <div class="room-item" data-ruangan="Ruangan 1" data-kapasitas="20" data-deskripsi="Deskripsi Ruangan 1">
+                  <img class="room-photo" src="https://source.unsplash.com/400x300/?room" alt="Foto Ruangan 1">
+                  <div class="room-info">
+                      <h3>Ruangan 1</h3>
+                      <p>Kapasitas: 20</p>
+                      <p>Deskripsi: Deskripsi Ruangan 1</p>
+                  </div>
+              </div>
+              <div class="room-item" data-ruangan="Ruangan 1" data-kapasitas="20" data-deskripsi="Deskripsi Ruangan 1">
+                <img class="room-photo" src="https://source.unsplash.com/400x300/?room" alt="Foto Ruangan 1">
+                <div class="room-info">
+                    <h3>Ruangan 1</h3>
+                    <p>Kapasitas: 20</p>
+                    <p>Deskripsi: Deskripsi Ruangan 1</p>
+                </div>
+            </div>
+            <div class="room-item" data-ruangan="Ruangan 1" data-kapasitas="20" data-deskripsi="Deskripsi Ruangan 1">
+              <img class="room-photo" src="https://source.unsplash.com/400x300/?room" alt="Foto Ruangan 1">
+              <div class="room-info">
+                  <h3>Ruangan 1</h3>
+                  <p>Kapasitas: 20</p>
+                  <p>Deskripsi: Deskripsi Ruangan 1</p>
+              </div>
+          </div>
+          <div class="room-item" data-ruangan="Ruangan 1" data-kapasitas="20" data-deskripsi="Deskripsi Ruangan 1">
+            <img class="room-photo" src="https://source.unsplash.com/400x300/?room" alt="Foto Ruangan 1">
+            <div class="room-info">
+                <h3>Ruangan 1</h3>
+                <p>Kapasitas: 20</p>
+                <p>Deskripsi: Deskripsi Ruangan 1</p>
+            </div>
+        </div>
+                <!-- Add more room items as needed -->
+            </div>
+        </div>
+        <div class="modal-overlay" id="modal-overlay">
+          <div class="modal-content">
+              <span class="close-modal" onclick="closeModal()">&times;</span>
+              <img id="room-image" src="" alt="">
+              <h2 id="room-name"></h2>
+              <p>Kapasitas: <span id="room-capacity"></span></p>
+              <p>Deskripsi: <span id="room-description"></span></p>
+          </div>
+      </div>
+      
+      <div class="form-container">
+        <h2>Form Peminjaman Ruang</h2>
+        <form action="/peminjaman" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="ruangan" class="form-label">Pilih Ruangan:</label>
+                <select name="ruangan" id="ruangan" class="form-input">
+                    <option value="ruangan1">Ruangan 1</option>
+                    <option value="ruangan2">Ruangan 2</option>
+                    <option value="ruangan3">Ruangan 3</option>
+                    <option value="ruangan4">Ruangan 4</option>
+                    <option value="ruangan5">Ruangan 5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tanggal" class="form-label">Tanggal Peminjaman:</label>
+                <input type="date" name="tanggal" id="tanggal" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="jam" class="form-label">Jam Peminjaman:</label>
+                <input type="time" name="jam" id="jam" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="keperluan" class="form-label">Keperluan:</label>
+                <textarea name="keperluan" id="keperluan" cols="30" rows="5" class="form-input"></textarea>
+            </div>
+            <button type="submit" class="form-button">Ajukan Peminjaman</button>
+        </form>
+    </div>
+    <script>
+        const roomItems = document.querySelectorAll('.room-item');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const roomNameElem = document.getElementById('room-name');
+        const roomCapacityElem = document.getElementById('room-capacity');
+        const roomDescriptionElem = document.getElementById('room-description');
+        const roomImageElem = document.getElementById('room-image');
+
+        roomItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const roomName = item.getAttribute('data-ruangan');
+                const roomCapacity = item.getAttribute('data-kapasitas');
+                const roomDescription = item.getAttribute('data-deskripsi');
+                const roomImageSrc = item.querySelector('.room-photo').src;
+
+                roomNameElem.textContent = roomName;
+                roomCapacityElem.textContent = roomCapacity;
+                roomDescriptionElem.textContent = roomDescription;
+                roomImageElem.src = roomImageSrc;
+
+                modalOverlay.style.display = 'flex';
+            });
+        });
+
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

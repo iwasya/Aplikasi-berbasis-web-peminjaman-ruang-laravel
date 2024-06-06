@@ -1,0 +1,24 @@
+/* style.css */
+.card {
+    margin-top: 50px; /* Membuat jarak dari atas */
+    border: 1px solid #ccc; /* Menambahkan border untuk card */
+    border-radius: 10px; /* Membuat sudut card menjadi melengkung */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Menambahkan efek bayangan */
+}
+
+.card-header {
+    font-size: 20px; /* Ukuran font judul */
+    font-weight: bold; /* Membuat judul menjadi tebal */
+}
+
+.card-body {
+    padding: 30px; /* Memberikan padding pada body card */
+}
+
+.alert {
+    margin-bottom: 20px; /* Memberikan jarak antara alert dengan elemen lain */
+}
+
+.mb-4 {
+    margin-bottom: 40px; /* Memberikan jarak yang lebih besar */
+}
